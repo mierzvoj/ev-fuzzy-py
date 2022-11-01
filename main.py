@@ -89,3 +89,12 @@ range_batt_high = fuzz.interp_membership(x_range, range_long_max, input_battery_
 # fuzzy rule. This is called fuzzy combination and is discussed in section 4.1.3.
 
 rule1 = np.fmin(np.fmin(range_pass_four, range_temp_low), range_low)
+rule2 = np.fmin(np.fmin(range_pass_two, range_temp_med), range_low)
+
+out_low = np.fmax(rule1, rule2)
+
+defuzzified = fuzz.defuzz(x_range, out_low, "mom")
+
+
+print("Range is :", defuzzified)
+
