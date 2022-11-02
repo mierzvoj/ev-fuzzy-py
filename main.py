@@ -17,7 +17,7 @@ batt_capacity_low = int(54)
 batt_capacity_medium = int(62)
 batt_capacity_medium_higher = int(75)
 batt_capacity_high = int(82)
-# Memebership functions
+# Membership functions
 # Batteries
 range_long_min = mf.trapmf(x_range, [0, 0, 320, 328])
 range_long_med = mf.trapmf(x_range, [0, 0, 330, 338])
@@ -33,7 +33,6 @@ range_temp_0_10 = mf.trapmf(x_range, [0, 350, 350, 350])
 # Range combined with passengers number
 range_passengers_two = mf.trapmf(x_range, [0, 350, 358, 358])
 range_passengers_four = mf.trapmf(x_range, [0, 350, 350, 350])
-
 # Ranges low, mid, long, output membership function
 range_low = mf.trapmf(x_range, [100, 150, 200, 250])
 range_mid = mf.trapmf(x_range, [200, 250, 300, 350])
@@ -85,16 +84,44 @@ range_batt_high = fuzz.interp_membership(x_range, range_long_max, input_battery_
 # There would have to be membership functions that define what we mean by high temperature
 # (input1), high humidity (input2) and a hot room (output1). This process of taking an input such as
 # temperature and processing it through a membership function to determine what we mean by "high" temperature
-# is called fuzzification and is discussed in section 4.1.2. Also, we must define what we mean by "and" / "or" in the
-# fuzzy rule. This is called fuzzy combination and is discussed in section 4.1.3.
+# is called fuzzification. Also, we must define what we mean by "and" / "or" in the
+# fuzzy rule. This is called fuzzy combination.
 
-rule1 = np.fmin(np.fmin(range_pass_four, range_temp_low), range_low)
-rule2 = np.fmin(np.fmin(range_pass_two, range_temp_med), range_low)
+rule1 = np.fmin(np.fmin(np.fmin(np.fmin(range_pass_four, range_temp_low), range_batt_small), range_city), range_low)
+rule2 = np.fmin(np.fmin(np.fmin(np.fmin(range_pass_two, range_temp_low), range_batt_small), range_city), range_low)
+rule3 = np.fmin(np.fmin(np.fmin(np.fmin(range_pass_two, range_temp_med), range_batt_med), range_city), range_low)
+rule4 = np.fmin(np.fmin(np.fmin(np.fmin(range_pass_two, range_temp_med), range_batt_med_high), range_city), range_low)
+rule5 = np.fmin(np.fmin(np.fmin(np.fmin(range_pass_two, range_temp_high), range_batt_med_high), range_city), range_low)
+rule6 = np.fmin(np.fmin(np.fmin(np.fmin(range_pass_two, range_temp_high), range_batt_high), range_city), range_low)
+rule7 = np.fmin(np.fmin(np.fmin(np.fmin(range_pass_two, range_temp_min10_0), range_batt_small), range_city), range_low)
+rule8 = np.fmin(np.fmin(np.fmin(np.fmin(range_pass_two, range_temp_lower_than_min10), range_batt_small), range_city), range_low)
 
-out_low = np.fmax(rule1, rule2)
+rule9 = np.fmin(np.fmin(np.fmin(np.fmin(range_pass_four, range_temp_low), range_batt_small), range_city), range_mid)
+rule10 = np.fmin(np.fmin(np.fmin(np.fmin(range_pass_two, range_temp_low), range_batt_small), range_city), range_mid)
+rule11 = np.fmin(np.fmin(np.fmin(np.fmin(range_pass_two, range_temp_med), range_batt_med), range_city), range_mid)
+rule12 = np.fmin(np.fmin(np.fmin(np.fmin(range_pass_two, range_temp_med), range_batt_med_high), range_city), range_mid)
+rule13 = np.fmin(np.fmin(np.fmin(np.fmin(range_pass_two, range_temp_high), range_batt_med_high), range_city), range_mid)
+rule14 = np.fmin(np.fmin(np.fmin(np.fmin(range_pass_two, range_temp_high), range_batt_high), range_city), range_mid)
+rule15 = np.fmin(np.fmin(np.fmin(np.fmin(range_pass_two, range_temp_min10_0), range_batt_small), range_city), range_mid)
+rule16 = np.fmin(np.fmin(np.fmin(np.fmin(range_pass_two, range_temp_lower_than_min10), range_batt_small), range_city), range_mid)
 
-defuzzified = fuzz.defuzz(x_range, out_low, "mom")
+rule17 = np.fmin(np.fmin(np.fmin(np.fmin(range_pass_four, range_temp_low), range_batt_small), range_city), range_long)
+rule18 = np.fmin(np.fmin(np.fmin(np.fmin(range_pass_two, range_temp_low), range_batt_small), range_city), range_long)
+rule19 = np.fmin(np.fmin(np.fmin(np.fmin(range_pass_two, range_temp_med), range_batt_med), range_city), range_long)
+rule20 = np.fmin(np.fmin(np.fmin(np.fmin(range_pass_two, range_temp_med), range_batt_med_high), range_city), range_long)
+rule21 = np.fmin(np.fmin(np.fmin(np.fmin(range_pass_two, range_temp_high), range_batt_med_high), range_city), range_long)
+rule22 = np.fmin(np.fmin(np.fmin(np.fmin(range_pass_two, range_temp_high), range_batt_high), range_city), range_long)
+rule23 = np.fmin(np.fmin(np.fmin(np.fmin(range_pass_two, range_temp_min10_0), range_batt_small), range_city), range_long)
+rule24 = np.fmin(np.fmin(np.fmin(np.fmin(range_pass_two, range_temp_lower_than_min10), range_batt_small), range_city), range_long)
+
+range_low = np.fmax(np.fmax(np.fmax(np.fmax(np.fmax(np.fmax(np.fmax(rule1, rule2), rule3), rule4), rule5), rule6), rule7), rule8)
+range_mid = np.fmax(np.fmax(np.fmax(np.fmax(np.fmax(np.fmax(np.fmax(rule9, rule10), rule11), rule12), rule13), rule14), rule15), rule16)
+range_long = np.fmax(np.fmax(np.fmax(np.fmax(np.fmax(np.fmax(np.fmax(rule17, rule18), rule19), rule20), rule21), rule22), rule23), rule24)
+
+range = np.fmax(np.fmax(range_low, range_mid), range_long)
+
+defuzzified = fuzz.defuzz(x_range, range, "mom")
 
 
-print("Range is :", defuzzified)
+print("Range is:", defuzzified)
 
