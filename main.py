@@ -2,13 +2,18 @@ import numpy as np
 import skfuzzy as fuzz
 import skfuzzy.membership as mf
 import matplotlib.pyplot as plt
+# Łukasz Cettler
+# Wojciech Mierzejewski
+# EV range fuzzy calculator
+# Calculator takes input: driving style (highway, city, mixed), temperature, battery capacity as variable data
 
 # Input values
 driving_style = int(input("Input your av. energy consumption in Wh/km: "))
 input_temperature = int(input("Input temperature: "))
 input_battery_capacity = int(input("Input battery size: "))
-
+# Total driving rage for EV (max 640 km with Mercedes EQ)
 x_range = np.arange(0, 640, 1)
+# Temperatures range
 x_temperature = np.arange(-10, 23, 1)
 # Power in kWh of estimated remaining battery capacity per 100 km
 x_estimation = np.arange(10, 24, 1)
