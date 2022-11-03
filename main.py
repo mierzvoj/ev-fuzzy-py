@@ -36,7 +36,7 @@ range_low = mf.trapmf(x_range, [90, 100, 135, 160])
 range_medium = mf.trapmf(x_range, [380, 390, 470, 480])
 range_high = mf.trapmf(x_range, [470, 480, 630, 640])
 
-# Plots for better overview
+# Plots for a better overview
 fig, (ax0, ax1, ax2, ax3) = plt.subplots(nrows=4)
 ax0.plot(x_temperature, weather_cold, 'r', linewidth=1, label="range1")
 ax0.plot(x_temperature, weather_mild, 'g', linewidth=2, label="range1")
@@ -83,37 +83,37 @@ highway_drive = fuzz.interp_membership(x_estimation, highway_drive, driving_styl
 # is called fuzzification. Also, we must define what we mean by "and" / "or" in the
 # fuzzy rule. This is called fuzzy combination.
 
-rule1 = np.fmin(np.fmin(np.fmin(batt_low, weather_cold), city_drive), range_high)
-rule2 = np.fmin(np.fmin(np.fmin(batt_low, weather_cold), highway_drive), range_low)
-rule3 = np.fmin(np.fmin(np.fmin(batt_low, weather_cold), combined_drive), range_medium)
+rule1 = np.fmin(np.fmin(np.fmin(batt_low, temperature_low), city_drive), range_high)
+rule2 = np.fmin(np.fmin(np.fmin(batt_low, temperature_low), highway_drive), range_low)
+rule3 = np.fmin(np.fmin(np.fmin(batt_low, temperature_low), combined_drive), range_medium)
 
-rule4 = np.fmin(np.fmin(np.fmin(batt_low, weather_mild), city_drive), range_high)
-rule5 = np.fmin(np.fmin(np.fmin(batt_low, weather_mild), highway_drive), range_low)
-rule6 = np.fmin(np.fmin(np.fmin(batt_low, weather_mild), combined_drive), range_medium)
+rule4 = np.fmin(np.fmin(np.fmin(batt_low, temperature_high), city_drive), range_high)
+rule5 = np.fmin(np.fmin(np.fmin(batt_low, temperature_high), highway_drive), range_low)
+rule6 = np.fmin(np.fmin(np.fmin(batt_low, temperature_high), combined_drive), range_medium)
 
-rule7 = np.fmin(np.fmin(np.fmin(batt_medium, weather_cold), city_drive), range_high)
-rule8 = np.fmin(np.fmin(np.fmin(batt_medium, weather_cold), highway_drive), range_low)
-rule9 = np.fmin(np.fmin(np.fmin(batt_medium, weather_cold), combined_drive), range_medium)
+rule7 = np.fmin(np.fmin(np.fmin(batt_medium, temperature_low), city_drive), range_high)
+rule8 = np.fmin(np.fmin(np.fmin(batt_medium, temperature_low), highway_drive), range_low)
+rule9 = np.fmin(np.fmin(np.fmin(batt_medium, temperature_low), combined_drive), range_medium)
 
-rule10 = np.fmin(np.fmin(np.fmin(batt_medium, weather_mild), city_drive), range_high)
-rule11 = np.fmin(np.fmin(np.fmin(batt_medium, weather_mild), highway_drive), range_low)
-rule12 = np.fmin(np.fmin(np.fmin(batt_medium, weather_mild), combined_drive), range_medium)
+rule10 = np.fmin(np.fmin(np.fmin(batt_medium, temperature_high), city_drive), range_high)
+rule11 = np.fmin(np.fmin(np.fmin(batt_medium, temperature_high), highway_drive), range_low)
+rule12 = np.fmin(np.fmin(np.fmin(batt_medium, temperature_high), combined_drive), range_medium)
 
-rule13 = np.fmin(np.fmin(np.fmin(batt_medium, weather_cold), city_drive), range_high)
-rule14 = np.fmin(np.fmin(np.fmin(batt_medium, weather_cold), highway_drive), range_low)
-rule15 = np.fmin(np.fmin(np.fmin(batt_medium, weather_cold), combined_drive), range_medium)
+rule13 = np.fmin(np.fmin(np.fmin(batt_medium, temperature_low), city_drive), range_high)
+rule14 = np.fmin(np.fmin(np.fmin(batt_medium, temperature_low), highway_drive), range_low)
+rule15 = np.fmin(np.fmin(np.fmin(batt_medium, temperature_low), combined_drive), range_medium)
 
-rule16 = np.fmin(np.fmin(np.fmin(batt_medium, weather_mild), city_drive), range_high)
-rule17 = np.fmin(np.fmin(np.fmin(batt_medium, weather_mild), highway_drive), range_low)
-rule18 = np.fmin(np.fmin(np.fmin(batt_medium, weather_mild), combined_drive), range_medium)
+rule16 = np.fmin(np.fmin(np.fmin(batt_medium, temperature_high), city_drive), range_high)
+rule17 = np.fmin(np.fmin(np.fmin(batt_medium, temperature_high), highway_drive), range_low)
+rule18 = np.fmin(np.fmin(np.fmin(batt_medium, temperature_high), combined_drive), range_medium)
 
-rule19 = np.fmin(np.fmin(np.fmin(batt_high, weather_cold), city_drive), range_high)
-rule20 = np.fmin(np.fmin(np.fmin(batt_high, weather_cold), highway_drive), range_low)
-rule21 = np.fmin(np.fmin(np.fmin(batt_high, weather_cold), combined_drive), range_medium)
+rule19 = np.fmin(np.fmin(np.fmin(batt_high, temperature_low), city_drive), range_high)
+rule20 = np.fmin(np.fmin(np.fmin(batt_high, temperature_low), highway_drive), range_low)
+rule21 = np.fmin(np.fmin(np.fmin(batt_high, temperature_low), combined_drive), range_medium)
 
-rule22 = np.fmin(np.fmin(np.fmin(batt_high, weather_mild), city_drive), range_high)
-rule23 = np.fmin(np.fmin(np.fmin(batt_high, weather_mild), highway_drive), range_low)
-rule24 = np.fmin(np.fmin(np.fmin(batt_high, weather_mild), combined_drive), range_medium)
+rule22 = np.fmin(np.fmin(np.fmin(batt_high, temperature_high), city_drive), range_high)
+rule23 = np.fmin(np.fmin(np.fmin(batt_high, temperature_high), highway_drive), range_low)
+rule24 = np.fmin(np.fmin(np.fmin(batt_high, temperature_high), combined_drive), range_medium)
 
 #Mamdani inference system
 
